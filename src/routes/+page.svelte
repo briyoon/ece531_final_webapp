@@ -1,20 +1,14 @@
 <script>
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
-    import { checkAuth, logout } from "$lib/api/auth";
 
-    onMount(() => {
+    import { checkAuth } from "$lib/api/auth";
+
+    onMount(async () => {
         if (!checkAuth()) {
             goto("/login");
+        } else {
+            goto("/dashboard");
         }
     });
-
-    function handleLogout() {
-        logout();
-        goto("/login");
-    }
 </script>
-
-<h1>Authenticated</h1>
-<p>You are logged in!</p>
-<button on:click={handleLogout}>Logout</button>

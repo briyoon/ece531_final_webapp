@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-copper {
+    color: #B87333;
+}
+
+.bg-copper {
+    background-color: #B87333;
+}
+
+.ring-copper {
+    --tw-ring-color: #B87333;
+}
+
+.hover:bg-copper-700:hover {
+    background-color: #996633;
+}
+
+.focus:bg-copper-700:focus {
+    background-color: #996633;
+}
+
+.text-bronze {
+    color: #CD7F32;
+}
+
+.bg-bronze {
+    background-color: #CD7F32;
+}
+
+.ring-bronze {
+    --tw-ring-color: #CD7F32;
+}
+
+.hover:bg-bronze-700:hover {
+    background-color: #B06D2A;
+}
+
+.focus:bg-bronze-700:focus {
+    background-color: #B06D2A;
+}
