@@ -317,10 +317,8 @@
                                         <span class="text-white"
                                             >{slot.time}</span
                                         >
-                                        <span
-                                            class="text-[{getTemperatureColor(
-                                                slot.temperature,
-                                            )}] ml-2">{slot.temperature}°C</span
+                                        <span class="text-[#00ff00] ml-2"
+                                            >{slot.temperature}°C</span
                                         >
                                     </div>
                                     <div

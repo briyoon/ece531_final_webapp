@@ -30,6 +30,18 @@ export const getDeviceReports = async (deviceId) => {
 };
 
 /**
+ * Get a stream of the reports for a specific device, initally returns the last 10 minutes of data
+ * @param {string} deviceId - UUID of the device
+ * @returns {Promise<ThermostatReport[]>}
+ */
+export const getDeviceReportStream = async (deviceId) => {
+  const response = await api.get(`/user/device/${deviceId}/reports/stream`, {
+    responseType: 'stream'
+  });
+  return response.data;
+}
+
+/**
  * Upload a schedule for a specific device
  * @param {string} deviceId - UUID of the device
  * @param {ThermostatSchedule} schedule - The schedule to upload
@@ -56,4 +68,4 @@ export const getSchedule = async (deviceId) => {
   return response.data;
 };
 
-export default { getUserDevices, getDeviceReports, uploadSchedule, getSchedule, getUserDevice };
+export default { getUserDevices, getDeviceReports, getDeviceReportStream, uploadSchedule, getSchedule, getUserDevice };

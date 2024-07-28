@@ -1,16 +1,22 @@
 <script>
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { getUserDevice, getDeviceReports } from "$lib/api/user";
     import WeeklySchedule from "$lib/components/WeeklySchedule.svelte";
     import ReportChart from "$lib/components/ReportChart.svelte";
+    import {
+        reportDataStore,
+        connectionStatus,
+        connectToSSE,
+        disconnectSSE,
+    } from "$lib/api/reports.js";
 
     export let data;
 
     /** @type {UserDevice} */
     let deviceDetails;
     /** @type {ThermostatReport[]} */
-    let reportData;
+    $: reportData = $reportDataStore;
     let error = "";
 
     onMount(async () => {
@@ -18,10 +24,14 @@
             // @ts-ignore
             deviceDetails = await getUserDevice(data.deviceId);
             // @ts-ignore
-            reportData = await getDeviceReports(data.deviceId);
+            await connectToSSE(data.deviceId);
         } catch (/** @type {any} */ err) {
             error = "Failed to fetch device details";
         }
+    });
+
+    onDestroy(() => {
+        disconnectSSE();
     });
 
     function goBack() {
@@ -44,7 +54,7 @@
             <p class="text-red-500 mb-4">{error}</p>
         {:else if deviceDetails}
             <WeeklySchedule {deviceDetails} />
-            <ReportChart {reportData} />
+            <ReportChart {reportData} deviceId={data.deviceId} />
         {/if}
     </div>
 </div>
