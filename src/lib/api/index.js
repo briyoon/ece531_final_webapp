@@ -1,8 +1,11 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { config } from 'dotenv';
+
+const BASE_URL = process.env.API_ADDRESS;
 
 const api = axios.create({
-    baseURL: 'http://localhost:8000/api/v1',
+    baseURL: BASE_URL,
     // withCredentials: true
 });
 
